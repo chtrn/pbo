@@ -3,19 +3,62 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View.Dokter;
+import Model.Dokter.DAODokter;
+import Model.Dokter.ModelDokter;
+import View.Dokter.UpdateDokter;
+import View.MainView;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Acer
  */
 public class EditDokter extends javax.swing.JFrame {
+    DAODokter dao =
+            new DAODokter();
+    
+    private void loadTable(){
 
+        DefaultTableModel model =
+        (DefaultTableModel)
+        tableDokter.getModel();
+
+        model.setRowCount(0);
+
+        List<ModelDokter> list =
+                dao.getAll();
+
+        for(ModelDokter d : list){
+
+            model.addRow(
+            new Object[]{
+
+                d.getId(),
+                d.getNama(),
+                d.getSpesialisasi(),
+                d.getTelepon()
+
+            });
+
+        }
+
+    }
+
+    public EditDokter() {
+
+        initComponents();
+
+        loadTable();
+
+    }
+    
+    
     /**
      * Creates new form ViewUpdateDokter
      */
-    public EditDokter() {
-        initComponents();
-    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,11 +89,21 @@ public class EditDokter extends javax.swing.JFrame {
                 "ID", "Nama", "Spesialisasi", "No.Telepon"
             }
         ));
+        tableDokter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDokterMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableDokter);
 
         jLabel1.setText("DAFTAR DOKTER");
 
         btnUpdate.setText("UPDATE");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("DELETE");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +113,11 @@ public class EditDokter extends javax.swing.JFrame {
         });
 
         btnBack.setText("BACK");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,8 +162,69 @@ public class EditDokter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        int row =
+        tableDokter.getSelectedRow();
+
+        int id =
+        Integer.parseInt(
+        tableDokter
+        .getValueAt(row,0)
+        .toString());
+
+        dao.delete(id);
+
+        JOptionPane.showMessageDialog(
+        null,
+        "Delete berhasil");
+
+        loadTable();
+
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void tableDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDokterMouseClicked
+        
+    }//GEN-LAST:event_tableDokterMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        
+        new UpdateDokter().setVisible(true);
+        this.dispose();
+        int selectedRow = tableDokter.getSelectedRow();
+        
+        // 2. Validate selection
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Silakan pilih dokter yang ingin diubah pada tabel terlebih dahulu!");
+            return;
+        }
+
+        try {
+            // 3. Retrieve data from the JTable cells
+            // Column indices: 0=ID, 1=Nama, 2=Spesialisasi, 3=Telepon
+            String id = tableDokter.getValueAt(selectedRow, 0).toString();
+            String nama = tableDokter.getValueAt(selectedRow, 1).toString();
+            String spesialisasi = tableDokter.getValueAt(selectedRow, 2).toString();
+            String telepon = tableDokter.getValueAt(selectedRow, 3).toString();
+
+            // 4. Create UpdateDokter form and pass the data through the constructor
+            UpdateDokter formUpdate = new UpdateDokter(id, nama, spesialisasi, telepon);
+            
+            // 5. Navigate to the update form
+            formUpdate.setVisible(true);
+            
+            // 6. Dispose of this current "EditDokter" list form
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat data untuk diubah: " + e.getMessage());
+        }
+    
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new MainView().setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,6 +258,7 @@ public class EditDokter extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new EditDokter().setVisible(true);
             }

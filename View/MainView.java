@@ -6,6 +6,10 @@ package View;
 import View.Pasien.TambahPasien;
 import View.Dokter.TambahDokter;
 import View.Obat.TambahObat;
+import View.Dokter.EditDokter;
+import View.Obat.EditObat;
+import View.Pasien.EditPasien;
+
 /**
  *
  * @author Acer
@@ -112,7 +116,7 @@ public class MainView extends javax.swing.JFrame {
                                     .addComponent(btnLihatDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnLIhatObat, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
+                        .addGap(129, 129, 129)
                         .addComponent(btnAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
@@ -133,9 +137,9 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLIhatObat)
                     .addComponent(btnTambahObat))
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(btnAntrian)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -160,15 +164,15 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahObatActionPerformed
 
     private void btnLihatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLihatPasienActionPerformed
-        // TODO add your handling code here:
+        new EditPasien().setVisible(true);
     }//GEN-LAST:event_btnLihatPasienActionPerformed
 
     private void btnLihatDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLihatDokterActionPerformed
-        // TODO add your handling code here:
+        new EditDokter().setVisible(true);
     }//GEN-LAST:event_btnLihatDokterActionPerformed
 
     private void btnLIhatObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLIhatObatActionPerformed
-        // TODO add your handling code here:
+        new EditObat().setVisible(true);
     }//GEN-LAST:event_btnLIhatObatActionPerformed
 
     /**

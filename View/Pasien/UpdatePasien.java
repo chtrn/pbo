@@ -5,41 +5,55 @@
 package View.Pasien;
 import Model.Pasien.ModelPasien;
 import Model.Pasien.DAOPasien;
+import View.Pasien.EditPasien;
 import View.MainView;
 import javax.swing.JOptionPane;
 import java.sql.Date;
 import java.util.Calendar;
-
 /**
  *
  * @author Acer
  */
-public class TambahPasien extends javax.swing.JFrame {
-    private DAOPasien daoPasien =new DAOPasien();
-    /**
-     * Creates new form ViewPasien
-     */
-    public TambahPasien() {
+public class UpdatePasien extends javax.swing.JFrame {
+
+   DAOPasien daoPasien = new DAOPasien();
+    int idPasien;
+
+    public UpdatePasien(ModelPasien pasien) {
         initComponents();
+
+        idPasien = pasien.getId();
+
+        txtNama.setText(pasien.getNama());
+        txtRiwayat.setText(pasien.getRiwayat());
+        txtTelepon.setText(pasien.getTelepon());
+        cbGolDarah.setSelectedItem(pasien.getGol_Darah());
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(pasien.getTgl_Lahir());
+
+        spinTanggal.setValue(
+                cal.get(Calendar.DAY_OF_MONTH));
+
+        spinBulan.setValue(
+                cal.get(Calendar.MONTH)+1);
+
+        spinTahun.setValue(
+                cal.get(Calendar.YEAR));
     }
 
     private void clearField(){
 
         txtNama.setText("");
-
         txtRiwayat.setText("");
-
         txtTelepon.setText("");
 
         spinTanggal.setValue(1);
-
         spinBulan.setValue(1);
-
         spinTahun.setValue(2000);
 
         cbGolDarah.setSelectedIndex(0);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,51 +63,39 @@ public class TambahPasien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtNama = new javax.swing.JTextField();
-        spinTanggal = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         spinBulan = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         spinTahun = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
         cbGolDarah = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
         txtRiwayat = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         txtTelepon = new javax.swing.JTextField();
-        btnTambah = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
+        txtNama = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
+        spinTanggal = new javax.swing.JSpinner();
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("TAMBAH PASIEN");
-
-        jLabel2.setText("Nama Lengkap");
-
-        jLabel3.setText("Tanggal Lahir");
-
-        jLabel4.setText("Golongan Darah");
-
-        jLabel5.setText("Riwayat Penyakit");
-
-        jLabel6.setText("No. Telepon");
-
-        txtNama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNamaActionPerformed(evt);
-            }
-        });
 
         jLabel7.setText("Tanggal");
 
         jLabel8.setText("Bulan");
 
+        jLabel1.setText("UPDATE PASIEN");
+
         jLabel9.setText("Tahun");
+
+        jLabel2.setText("Nama Lengkap");
+
+        jLabel3.setText("Tanggal Lahir");
 
         cbGolDarah.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "AB", "O", "Tidak Tahu" }));
         cbGolDarah.addActionListener(new java.awt.event.ActionListener() {
@@ -102,10 +104,22 @@ public class TambahPasien extends javax.swing.JFrame {
             }
         });
 
-        btnTambah.setText("TAMBAH");
-        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Golongan Darah");
+
+        jLabel5.setText("Riwayat Penyakit");
+
+        jLabel6.setText("No. Telepon");
+
+        btnUpdate.setText("UPDATE");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTambahActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        txtNama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamaActionPerformed(evt);
             }
         });
 
@@ -164,10 +178,10 @@ public class TambahPasien extends javax.swing.JFrame {
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(127, 127, 127)
-                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(92, 92, 92)
                         .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,9 +214,9 @@ public class TambahPasien extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTambah)
+                    .addComponent(btnUpdate)
                     .addComponent(btnClear))
                 .addGap(18, 18, 18)
                 .addComponent(btnBack)
@@ -216,67 +230,96 @@ public class TambahPasien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbGolDarahActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        clearField();
-    }//GEN-LAST:event_btnClearActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        try{
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-       new MainView().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnBackActionPerformed
+            ModelPasien pasien =
+                    new ModelPasien();
+
+            pasien.setId(idPasien);
+
+            pasien.setNama(
+                    txtNama.getText());
+
+            pasien.setRiwayat(
+                    txtRiwayat.getText());
+
+            pasien.setTelepon(
+                    txtTelepon.getText());
+
+            pasien.setGol_Darah(
+                    cbGolDarah
+                    .getSelectedItem()
+                    .toString());
+
+            int tgl =
+                    Integer.parseInt(
+                    spinTanggal
+                    .getValue()
+                    .toString());
+
+            int bulan =
+                    Integer.parseInt(
+                    spinBulan
+                    .getValue()
+                    .toString());
+
+            int tahun =
+                    Integer.parseInt(
+                    spinTahun
+                    .getValue()
+                    .toString());
+
+            Calendar cal =
+                    Calendar.getInstance();
+
+            cal.set(
+                    tahun,
+                    bulan-1,
+                    tgl);
+
+            Date tanggal =
+                    new Date(
+                    cal.getTimeInMillis());
+
+            pasien.setTgl_Lahir(
+                    tanggal);
+
+            daoPasien.update(
+                    pasien);
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Update berhasil");
+
+            new EditPasien()
+                    .setVisible(true);
+
+            dispose();
+
+        }
+
+        catch(Exception e){
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage());
+
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNamaActionPerformed
 
-    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        try {
-        // 1. Validasi input teks agar tidak kosong
-        if (txtNama.getText().trim().isEmpty() || txtTelepon.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nama Lengkap dan No. Telepon wajib diisi!");
-            return;
-        }
-
-        ModelPasien pasien = new ModelPasien();
-        pasien.setNama(txtNama.getText().trim());
-        pasien.setRiwayat(txtRiwayat.getText().trim());
-        pasien.setTelepon(txtTelepon.getText().trim());
-        pasien.setGol_Darah(cbGolDarah.getSelectedItem().toString());
-
-        // 2. Ambil nilai Spinner dengan proteksi Anti-Null
-        int tanggal = 1;
-        int bulan = 1;
-        int tahun = 2000;
-
-        if (spinTanggal.getValue() != null) {
-            tanggal = Integer.parseInt(spinTanggal.getValue().toString());
-        }
-        if (spinBulan.getValue() != null) {
-            bulan = Integer.parseInt(spinBulan.getValue().toString());
-        }
-        if (spinTahun.getValue() != null) {
-            tahun = Integer.parseInt(spinTahun.getValue().toString());
-        }
-
-        // 3. Menyusun tanggal lahir menggunakan Calendar
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        cal.set(tahun, bulan - 1, tanggal);
-
-        // 4. Bungkus ke dalam java.sql.Date
-        java.sql.Date tglLahir = new java.sql.Date(cal.getTimeInMillis());
-        pasien.setTgl_Lahir(tglLahir);
-
-        // 5. Simpan ke database melalui DAO
-        daoPasien.insert(pasien);
-
-        JOptionPane.showMessageDialog(null, "Data pasien berhasil ditambah!");
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         clearField();
+    }//GEN-LAST:event_btnClearActionPerformed
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Gagal tambah data\n" + e.getMessage());
-        e.printStackTrace(); // Membantu melacak baris error di konsol NetBeans jika ada hal lain
-    }
-    }//GEN-LAST:event_btnTambahActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        new MainView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,28 +338,21 @@ public class TambahPasien extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TambahPasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdatePasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TambahPasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdatePasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TambahPasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdatePasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TambahPasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdatePasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TambahPasien().setVisible(true);
+                
             }
         });
     }
@@ -324,7 +360,7 @@ public class TambahPasien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnClear;
-    private javax.swing.JButton btnTambah;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbGolDarah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -343,3 +379,4 @@ public class TambahPasien extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelepon;
     // End of variables declaration//GEN-END:variables
 }
+
